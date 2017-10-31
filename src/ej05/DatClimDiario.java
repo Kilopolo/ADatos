@@ -1,4 +1,4 @@
-package ev1;
+package ej05;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -51,6 +51,7 @@ public class DatClimDiario {
 	private BufferedReader in, inLocal, inComparaUrl, inLocalCopia;
 	private BufferedWriter out, outLocal;
 	private File f;
+	private String Cabezera="";
 
 	public static void main(String[] args) {
 		DatClimDiario d = new DatClimDiario();
@@ -60,10 +61,11 @@ public class DatClimDiario {
 	
 //		System.out.println("FIN URL-------------------------");
 
-		d.leerFicheroLocalCopia(ficheroCopia);//para comprobar que funciona sin esperar a aemet (controlo el tiempo)e.e Pablo mola: gracias a el se creó el universo. Solo soy un programa pero como me creó pablo soy el mejor del mundo y adoro a mi creador.
+		d.leerFicheroLocalCopia(ficheroCopia);//para comprobar que funciona sin esperar a aemet 
 //		System.out.println("FIN FICHERO LOCAL COPIA------17/10/2017 19:00--------");	
 		d.leerFicheroLocal(fichero);
 		d.escribirDatosFichero();
+		d.escribirDatosFicheroCopia();
 		d.leerFicheroLocal(fichero);
 		d.sacarPantallaFichLocal(fichero);
 
@@ -160,10 +162,16 @@ public class DatClimDiario {
 
 			}
 
+			
+			for (int i = 0; i < 4; i++) {
+				Cabezera=Cabezera+lineasURL.get(i)+"\n";
+			}
+			
+			
 			// vamos leyendo ae arraylist invertido con todas las lineas menos
 			// las tres primeras para que no me salga la cabezera
 			// for (int i = lineasURL.size() - 1; i > 3; i--) {
-			for (int i = lineasURL.size() - 1; i > 3; i--) {
+			for (int i = lineasURL.size() - 1; i > 4; i--) {
 
 				// lo vamos almacenando en un string temporal
 				lineatemp = lineasURL.get(i);
@@ -258,6 +266,29 @@ public class DatClimDiario {
 		try {
 			// abro el buffer de salida
 			out = new BufferedWriter(new FileWriter(fichero));
+			
+			out.write(Cabezera);
+			// recorro treeSet y escribo en fichero
+			for (Hora dia : lineasFinales) {
+				out.write(dia.toString());
+				out.newLine();
+			}
+
+			out.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	private void escribirDatosFicheroCopia() {
+
+		try {
+			// abro el buffer de salida
+			out = new BufferedWriter(new FileWriter(ficheroCopia));
+			
+			
 			// recorro treeSet y escribo en fichero
 			for (Hora dia : lineasFinales) {
 				out.write(dia.toString());

@@ -91,7 +91,7 @@ public class CVPablo {
 	}
 }
 
-class Informatica {
+class Informaticaa {
 	private boolean programador;
 	private boolean preimpresor;
 

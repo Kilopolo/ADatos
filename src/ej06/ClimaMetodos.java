@@ -38,11 +38,11 @@ public class ClimaMetodos {
 		// cm.leerDatosFichero(fichero);
 		
 		cm.añadirLineasArrayList(fichero);
-		System.out.println("----------------------DATOS HORARIO------------------------------------------------");
+		//System.out.println("----------------------DATOS HORARIO------------------------------------------------");
 		cm.crearHoras();
-		cm.enseñarHoras();
+		//cm.enseñarHoras();
 		System.out.println("----------------------DATOS DIARIOS------------------------------------------------");
-		cm.crearDias2();
+		cm.crearDias();
 		cm.enseñarDias();
 		System.out.println("----------------------DATOS GLOBALES------------------------------------------------");
 		cm.datosGlobales();
@@ -111,97 +111,6 @@ public class ClimaMetodos {
 		}
 	}
 
-	private void crearDias2() {
-
-		Date fechaActual = null;
-		// fecha para guardar la fecha de ayer y compararla con hoy y asi saber que ha
-		// cambiado el dia.
-		Date fechaResiduo = null;
-		boolean prec = false;
-		float maxTemp = 0;
-		Date horaMaxTemp = null;
-		float minTemp = 600;
-		Date horaMinTemp = null;
-		float avgTemp = 0;
-		int contadorAvgTemp = 0;
-		float acumuladoAvgTemp = 0;
-		Hora diaFin = horas.last();
-		boolean check = false;
-
-		for (Hora i : horas) {
-
-			try {// consigo los dias formateados como necesito y lo almaceno en variable tipo
-					// date
-				fechaActual = formatDay.parse(formatDay.format(i.getDate()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			if (fechaActual!=fechaResiduo) {
-				if (check) {
-		
-					avgTemp = acumuladoAvgTemp / contadorAvgTemp;
-					Dia d = new Dia(fechaActual, i.getLat(), i.getLon(), prec, maxTemp, horaMaxTemp, minTemp,
-							horaMaxTemp, avgTemp);
-					dias.add(d);
-					// almacenamos en residuo la fecha que usamos hasta ahora para comparar el
-					// cambio de dia
-					maxTemp = 0;
-					minTemp = 600;
-					contadorAvgTemp = 0;
-					acumuladoAvgTemp = 0;
-					avgTemp = 0;
-					prec = false;
-
-				}
-
-			
-//---------------------------------------------------------------------------
-			// temp max
-			if (i.getTemp()>maxTemp  ) {
-				
-				maxTemp = i.getTemp();
-				horaMaxTemp = i.getDate();
-				System.out.println("max"+maxTemp);
-			}
-			// temp min
-			if (i.getTemp()<minTemp) {
-				minTemp = i.getTemp();
-				horaMinTemp = i.getDate();
-				System.out.println("min"+minTemp);
-
-			}
-			// media temp
-			contadorAvgTemp++;
-			acumuladoAvgTemp = acumuladoAvgTemp + i.getTemp();
-			
-			// precipitaciones
-			if (i.getPrec() != 0) prec = true;
-//------------------------------------------------------------------------------
-			
-				if (diaFin.equals(i)) {
-
-					avgTemp = acumuladoAvgTemp / contadorAvgTemp;
-					Dia d = new Dia(fechaActual, i.getLat(), i.getLon(), prec, maxTemp, horaMaxTemp, minTemp,
-							horaMaxTemp, avgTemp);
-					dias.add(d);
-
-					
-					maxTemp = 0;
-					minTemp = 600;
-					contadorAvgTemp = 0;
-					acumuladoAvgTemp = 0;
-					avgTemp = 0;
-					prec = false;
-				}
-				check=true;
-				fechaResiduo = fechaActual;
-			}
-
-		} // --------------------------fin for each---------------
-
-	}
-
 	private void crearDias() {
 
 		Date fechaActual = null;
@@ -217,6 +126,8 @@ public class ClimaMetodos {
 		int contadorAvgTemp = 0;
 		float acumuladoAvgTemp = 0;
 		Date diaFin = horas.last().getDate();
+		
+		boolean check = false;
 
 		for (Hora i : horas) {
 
@@ -226,58 +137,68 @@ public class ClimaMetodos {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-
-			if (fechaResiduo == null) {
-
-				fechaResiduo = fechaActual;
+//---------------------------------------------------------------------------
+			// temp max
+			if (i.getTemp()>maxTemp  ) {
+				maxTemp = i.getTemp();
+				horaMaxTemp = i.getDate();
 			}
-
-			if (fechaActual.equals(fechaResiduo)) {
-				// temp max
-				if (maxTemp <= i.getTemp()) {
-					maxTemp = i.getTemp();
-					horaMaxTemp = i.getDate();
-				}
-				// temp min
-				if (minTemp >= i.getTemp()) {
-					minTemp = i.getTemp();
-					horaMinTemp = i.getDate();
-				}
-				// media temp
-				contadorAvgTemp++;
-				acumuladoAvgTemp = acumuladoAvgTemp + i.getTemp();
-				avgTemp = acumuladoAvgTemp / contadorAvgTemp;
-				// precipitaciones
-				if (i.getPrec() != 0)
-					prec = true;
-
-				// DONDE PONGO ESTO!!!!
-
-				if ((diaFin.compareTo(fechaResiduo)) == 0) {
-					Dia d = new Dia(fechaActual, i.getLat(), i.getLon(), prec, maxTemp, horaMaxTemp, minTemp,
-							horaMaxTemp, avgTemp);
+			
+			// temp min
+			if (i.getTemp()<minTemp) {
+				minTemp = i.getTemp();
+				horaMinTemp = i.getDate();
+			}
+			// media temp
+			contadorAvgTemp++;
+			acumuladoAvgTemp = acumuladoAvgTemp + i.getTemp();
+			
+			// precipitaciones
+			if (i.getPrec() != 0) prec = true;
+//------------------------------------------------------------------------------
+//			if (fechaActual!=fechaResiduo) ENTRA SIEMPRE
+			if (fechaActual.equals(fechaResiduo)==false) {
+				if (check) {
+					
+					avgTemp = acumuladoAvgTemp / contadorAvgTemp;
+					Dia d = new Dia(fechaResiduo, i.getLat(), i.getLon(), prec, maxTemp, horaMaxTemp, minTemp,
+							horaMinTemp, avgTemp);
 					dias.add(d);
+					// almacenamos en residuo la fecha que usamos hasta ahora para comparar el
+					// cambio de dia
+					maxTemp = 0;
+					minTemp = 600;
+					contadorAvgTemp = 0;
+					acumuladoAvgTemp = 0;
+					avgTemp = 0;
+					prec = false;
 				}
-
-			} else {
-
-				Dia d = new Dia(fechaActual, i.getLat(), i.getLon(), prec, maxTemp, horaMaxTemp, minTemp, horaMaxTemp,
-						avgTemp);
-				dias.add(d);
-				// almacenamos en residuo la fecha que usamos hasta ahora para comparar el
-				// cambio de dia
-				fechaResiduo = fechaActual;
-				maxTemp = 0;
-				minTemp = 600;
-				contadorAvgTemp = 0;
-				acumuladoAvgTemp = 0;
-				avgTemp = 0;
-				prec = false;
 			}
+				check=true;
+				fechaResiduo = fechaActual;
+				
+				
+				if (diaFin.equals(i.getDate())) {
+					avgTemp = acumuladoAvgTemp / contadorAvgTemp;
+					Dia d = new Dia(fechaResiduo, i.getLat(), i.getLon(), prec, maxTemp, horaMaxTemp, minTemp,
+							horaMinTemp, avgTemp);
+					dias.add(d);
 
-		}
+					
+					maxTemp = 0;
+					minTemp = 600;
+					contadorAvgTemp = 0;
+					acumuladoAvgTemp = 0;
+					avgTemp = 0;
+					prec = false;
+				}
+			
+
+		} // --------------------------fin for each---------------
 
 	}
+
+	
 
 	private void crearHoras() {
 		for (int i = 1; i < lineas.size(); i++) {
