@@ -70,6 +70,9 @@ public class DatClimDiario {
 		d.sacarPantallaFichLocal(fichero);
 
 	}
+	public DatClimDiario() {
+		// TODO Auto-generated constructor stub
+	}
 
 	// metodo para poder comprobar que almacena bien las horas en el archivo final
 	private void leerFicheroLocalCopia(String ficheroCopia) {

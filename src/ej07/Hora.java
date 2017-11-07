@@ -1,9 +1,9 @@
-package ej05;
+package ej07;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 //
@@ -40,17 +40,17 @@ import java.util.Locale;
  */
 public class Hora implements Comparable<Hora> {
 
-	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.GERMANY);
-	private Date fechayHora;
-	private float tempC;
-	private int VelViento;
-	private String DirViento;
-	private int racha;
-	private String DirRacha;
-	private float precipitacion;
-	private float presion;
-	private float tendencia;
-	private int humedad;
+	DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.GERMANY);
+	Date fechayHora;
+	float tempC;
+	int VelViento;
+	String DirViento;
+	int racha;
+	String DirRacha;
+	float precipitacion;
+	float presion;
+	float tendencia;
+	int humedad;
 
 	// String fechaString = "2017/10/17 19:30";
 	// SHORT is completely numeric, such as 12.13.52 or 3:30pm
