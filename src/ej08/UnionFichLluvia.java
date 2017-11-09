@@ -13,8 +13,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-
-
 public class UnionFichLluvia {
 
 	private URL url;
@@ -29,22 +27,19 @@ public class UnionFichLluvia {
 	private ArrayList<String> lecturaURL, lecturaFich;
 	private TreeSet<Hora> horas = new TreeSet<Hora>();
 
-
 	public static void main(String[] args) {
 		UnionFichLluvia o = new UnionFichLluvia();
-//		o.lecturaURL();
-//		o.lecturaFichDatos(DatosAntiguos);
-//		o.escrituraFichDatos(DatosAntiguos);
-//		o.escrituraFicherosLluvia(fichLluvia, fichNoLluvia);
+		o.lecturaURL();
+		o.lecturaFichDatos(DatosAntiguos);
+		o.escrituraFichDatos(DatosAntiguos);
+		o.escrituraFicherosLluvia(fichLluvia, fichNoLluvia);
 		o.lecturaYescrituraFicherosLluvia(fichLluvia, fichNoLluvia, ficheroUnion);
-		
+
 	}
 
+	private void lecturaYescrituraFicherosLluvia(String fichLluvia, String fichNoLluvia, String ficheroUnion) {
 
-
-	private void lecturaYescrituraFicherosLluvia(String fichLluvia, String fichNoLluvia,String ficheroUnion) {
-
-		//OPEN BUFFERS
+		// OPEN BUFFERS
 		try {
 			inFichLLuvia = new BufferedReader(new FileReader(fichLluvia));
 		} catch (FileNotFoundException e) {
@@ -63,8 +58,8 @@ public class UnionFichLluvia {
 			e.printStackTrace();
 			System.out.println("PROBLEMA AL CREAR EL ARCHIVO: ficheroUnion");
 		}
-		
-		//ALGORITMO
+
+		// ALGORITMO
 		Hora h = null;
 		Hora h2 = null;
 		try {
@@ -82,20 +77,33 @@ public class UnionFichLluvia {
 					e.printStackTrace();
 					System.out.println("PROBLEMA CREAR LAS HORAS fichUnion");
 				}
-				
+
 				if (h.getFechayHora().before(h2.getFechayHora())) {
 					outFichUnionLluvia.write(h.toString());
 					outFichUnionLluvia.newLine();
-					
-					
+					lineaFichLLuvia = inFichLLuvia.readLine();
+
 				} else {
 					outFichUnionLluvia.write(h2.toString());
 					outFichUnionLluvia.newLine();
+					lineaFichNoLLuvia = inFichNoLLuvia.readLine();
 				}
-				
-				
-				lineaFichLLuvia = inFichLLuvia.readLine();
-				lineaFichNoLLuvia = inFichNoLLuvia.readLine();
+
+			}
+
+			if ((lineaFichLLuvia = inFichLLuvia.readLine()) != null) {
+
+				while ((lineaFichNoLLuvia = inFichNoLLuvia.readLine()) != null) {
+					outFichUnionLluvia.write(h2.toString());
+					outFichUnionLluvia.newLine();
+					lineaFichNoLLuvia = inFichNoLLuvia.readLine();
+				}
+			} else {
+				while ((lineaFichLLuvia = inFichLLuvia.readLine()) != null) {
+					outFichUnionLluvia.write(h.toString());
+					outFichUnionLluvia.newLine();
+					lineaFichLLuvia = inFichLLuvia.readLine();
+				}
 			}
 
 		} catch (IOException e1) {
@@ -103,8 +111,7 @@ public class UnionFichLluvia {
 			System.out.println("PROBLEMA EN EL WHILE ENTRADA FICHEROS LLUVIA");
 		}
 
-		
-		//CLOSE BUFFERS
+		// CLOSE BUFFERS
 		try {
 			inFichLLuvia.close();
 		} catch (IOException e) {
