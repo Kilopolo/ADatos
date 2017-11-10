@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.TreeSet;
 
 public class UnionFichLluvia {
@@ -29,11 +30,78 @@ public class UnionFichLluvia {
 
 	public static void main(String[] args) {
 		UnionFichLluvia o = new UnionFichLluvia();
-		o.lecturaURL();
-		o.lecturaFichDatos(DatosAntiguos);
-		o.escrituraFichDatos(DatosAntiguos);
-		o.escrituraFicherosLluvia(fichLluvia, fichNoLluvia);
-		o.lecturaYescrituraFicherosLluvia(fichLluvia, fichNoLluvia, ficheroUnion);
+		o.menu();
+	}
+
+	private void menu() {
+		Scanner sc = new Scanner(System.in);
+		int opcion;
+
+		do {
+
+			System.out.println(
+					"--------------------------------------------------------------------------------------------------"
+							+ "\n" + "Que quieres hacer: " + "\n"
+							+ "1.Almacenar mas datos en el Archivo de datos del clima de AEMET." + "\n"
+							+ "2.Almacenar mas datos en los Archivos separados de Dias de Lluvia y Dias sin Lluvia."
+							+ "\n" + "3.Leer los archivos de lluvia y crear una Mezcla ordenada de ambos." + "\n"
+							+ "4.Todo lo anterior." + "\n" + "5.Salir del programa." + "\n");
+
+			opcion = sc.nextInt();
+
+			switch (opcion) {
+			case 1:
+				try {
+					lecturaURL();
+					lecturaFichDatos(DatosAntiguos);
+					escrituraFichDatos(DatosAntiguos);
+					System.out.println("Creando Archivo (../DatClimDiario.txt)...");
+				} catch (Exception e) {
+					System.out.println("¡¡¡ERROR!!!");
+				}
+				break;
+			case 2:
+				try {
+					lecturaURL();
+					lecturaFichDatos(DatosAntiguos);
+					escrituraFichDatos(DatosAntiguos);
+					escrituraFicherosLluvia(fichLluvia, fichNoLluvia);
+					System.out.println(
+							"Creando Archivos (../DatClimDiario.txt), (../fichLluvia.txt), (../fichNoLluvia.txt)...");
+				} catch (Exception e) {
+					System.out.println("¡¡¡ERROR!!!");
+				}
+				break;
+			case 3:
+				try {
+					lecturaYescrituraFicherosLluvia(fichLluvia, fichNoLluvia, ficheroUnion);
+					System.out.println("Creando Archivo (../fichUnion.txt)...");
+				} catch (Exception e) {
+					System.out.println("¡¡¡ERROR!!!");
+				}
+				break;
+			case 4:
+				try {
+					lecturaURL();
+					lecturaFichDatos(DatosAntiguos);
+					escrituraFichDatos(DatosAntiguos);
+					escrituraFicherosLluvia(fichLluvia, fichNoLluvia);
+					lecturaYescrituraFicherosLluvia(fichLluvia, fichNoLluvia, ficheroUnion);
+					System.out.println(
+							"Creando Archivos (../DatClimDiario.txt), (../fichLluvia.txt), (../fichNoLluvia.txt), (../fichUnion.txt)...");
+				} catch (Exception e) {
+					System.out.println("¡¡¡ERROR!!!");
+				}
+				break;
+			case 5:
+				System.out.println("Saliendo del programa...");
+				break;
+			default:
+				System.out.println("Opcion no válida.");
+				break;
+			}
+
+		} while (opcion != 5);
 
 	}
 
