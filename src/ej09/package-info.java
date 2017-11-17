@@ -82,8 +82,4 @@
  * 
  * @author Pablo
  */
-/**
- * @author Pablo
- *
- */
 package ej09;
