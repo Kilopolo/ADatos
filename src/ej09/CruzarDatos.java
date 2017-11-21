@@ -21,13 +21,15 @@ public class CruzarDatos {
 			"D:\\Google Drive\\CLASE\\2DAM\\Acceso a datos\\Ejercicios\\09. CruzarDatos\\DatEnfrentados.txt");
 	BufferedReader inPrev, inReal;
 	BufferedWriter outEnfren;
-//	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
+	// private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm",
+	// Locale.FRANCE);
 	Date date;
-	float TempPrev,TempReal,TempFallo;
-	float PrecipFallo,PrecipReal,PrecipPrev;
-	String WindDirFallo,WindDirReal,WindDirPrev;
-	float WindVelFallo,WindVelReal,WindVelPrev;
-	
+	float TempPrev, TempReal, TempFallo;
+	float PrecipFallo, PrecipReal, PrecipPrev;
+	String WindDirFallo, WindDirReal, WindDirPrev;
+	float WindVelFallo, WindVelReal, WindVelPrev;
+	DatosFallo hF = null;
+
 	public static void main(String[] args) {
 		CruzarDatos o = new CruzarDatos();
 		o.CruzDat(DatPrevClim, DatRealClim, DatEnfrentados);
@@ -64,77 +66,19 @@ public class CruzarDatos {
 
 				if (hP.getFechayHora().before(hR.getDate())) {
 					// <Tratar Maestro sin Movimientos>
-					// ----------------------------------------------------------------------------v
 					lineaPrev = inPrev.readLine();
 					lineaPrev = lineaPrev.replaceAll("\"", "");
 					hP = new HoraPrevision(lineaPrev.split(","));
 					hR = new HoraRealClima(lineaReal.split(","));
 
-					if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
-						
+					hF = tratarDatos(hP, hR);
 
-						date = hR.getDate();
-						
-						TempPrev = hP.getTempC();
-						TempReal = hR.getTemp();
-						TempFallo = TempReal - TempPrev;
-
-						PrecipPrev = hP.getPrecipitacion();
-						PrecipReal = hR.getPrec();
-						PrecipFallo = PrecipReal - PrecipPrev;
-						
-						WindDirPrev = hP.getDirViento();
-						WindDirReal = hR.getDirStr();
-						if (WindDirReal.equalsIgnoreCase(WindDirPrev)) {
-							WindDirFallo = WindDirReal;
-						} else WindDirFallo = "La dirección del viento real es: "+WindDirReal+" ,y la de la prevision es: "+WindDirPrev+".";
-						
-						WindVelPrev = hP.getVelViento();
-						WindVelReal = hR.getMod();
-						WindVelFallo = WindVelReal - WindVelPrev;
-						
-						DatosFallo hF = new DatosFallo(date, WindDirFallo, WindVelFallo, PrecipFallo, TempFallo);
-						
-						System.out.println(hF.toString());
-
-					}
-
-					// ----------------------------------------------------------------------------^
 				} else {
 					if (hP.getFechayHora().after(hR.getDate())) {
 						// <Tratar Movimiento sin Maestro>
-						// ----------------------------------------------------------------------------v
-						if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
-							
-
-							date = hR.getDate();
-							
-							TempPrev = hP.getTempC();
-							TempReal = hR.getTemp();
-							TempFallo = TempReal - TempPrev;
-
-							PrecipPrev = hP.getPrecipitacion();
-							PrecipReal = hR.getPrec();
-							PrecipFallo = PrecipReal - PrecipPrev;
-							
-							WindDirPrev = hP.getDirViento();
-							WindDirReal = hR.getDirStr();
-							if (WindDirReal.equalsIgnoreCase(WindDirPrev)) {
-								WindDirFallo = WindDirReal;
-							} else WindDirFallo = "La dirección del viento real es: "+WindDirReal+" ,y la de la prevision es: "+WindDirPrev+".";
-							
-							WindVelPrev = hP.getVelViento();
-							WindVelReal = hR.getMod();
-							WindVelFallo = WindVelReal - WindVelPrev;
-							
-							DatosFallo hF = new DatosFallo(date, WindDirFallo, WindVelFallo, PrecipFallo, TempFallo);
-							
-							System.out.println(hF.toString());
-
-						}
+						hF = tratarDatos(hP, hR);
 
 						lineaReal = inReal.readLine();
-						// ----------------------------------------------------------------------------^
 					} else {
 						// <Tratar Maestro con Movimientos>
 
@@ -146,39 +90,10 @@ public class CruzarDatos {
 						 * FMovimientos { hacer lo que se tenga que hacer }
 						 */
 
-						// ----------------------------------------------------------------------------v
-						if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
-							
-
-							date = hR.getDate();
-							
-							TempPrev = hP.getTempC();
-							TempReal = hR.getTemp();
-							TempFallo = TempReal - TempPrev;
-
-							PrecipPrev = hP.getPrecipitacion();
-							PrecipReal = hR.getPrec();
-							PrecipFallo = PrecipReal - PrecipPrev;
-							
-							WindDirPrev = hP.getDirViento();
-							WindDirReal = hR.getDirStr();
-							if (WindDirReal.equalsIgnoreCase(WindDirPrev)) {
-								WindDirFallo = WindDirReal;
-							} else WindDirFallo = "La dirección del viento real es: "+WindDirReal+" ,y la de la prevision es: "+WindDirPrev+".";
-							
-							WindVelPrev = hP.getVelViento();
-							WindVelReal = hR.getMod();
-							WindVelFallo = WindVelReal - WindVelPrev;
-							
-							DatosFallo hF = new DatosFallo(date, WindDirFallo, WindVelFallo, PrecipFallo, TempFallo);
-							
-							System.out.println(hF.toString());
-
-						}
+						hF = tratarDatos(hP, hR);
 
 						lineaPrev = inPrev.readLine();
 						lineaPrev = lineaPrev.replaceAll("\"", "");
-						// ----------------------------------------------------------------------------^
 					}
 				}
 			}
@@ -189,79 +104,25 @@ public class CruzarDatos {
 				System.out.println("ENTRA if");
 				while ((lineaReal = inReal.readLine()) != null) {
 					// <Tratar Movimiento sin Maestro>
-					// ----------------------------------------------------------------------------v
+
 					lineaReal = inReal.readLine();
+					lineaPrev = lineaPrev.replaceAll("\"", "");
+					hP = new HoraPrevision(lineaPrev.split(","));
 					hR = new HoraRealClima(lineaReal.split(","));
 
-					if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
-						
+					hF = tratarDatos(hP, hR);
 
-						date = hR.getDate();
-						
-						TempPrev = hP.getTempC();
-						TempReal = hR.getTemp();
-						TempFallo = TempReal - TempPrev;
-
-						PrecipPrev = hP.getPrecipitacion();
-						PrecipReal = hR.getPrec();
-						PrecipFallo = PrecipReal - PrecipPrev;
-						
-						WindDirPrev = hP.getDirViento();
-						WindDirReal = hR.getDirStr();
-						if (WindDirReal.equalsIgnoreCase(WindDirPrev)) {
-							WindDirFallo = WindDirReal;
-						} else WindDirFallo = "La dirección del viento real es: "+WindDirReal+" ,y la de la prevision es: "+WindDirPrev+".";
-						
-						WindVelPrev = hP.getVelViento();
-						WindVelReal = hR.getMod();
-						WindVelFallo = WindVelReal - WindVelPrev;
-						
-						DatosFallo hF = new DatosFallo(date, WindDirFallo, WindVelFallo, PrecipFallo, TempFallo);
-						
-						System.out.println(hF.toString());
-
-					}
-					// ----------------------------------------------------------------------------^
 				}
 			} else {
 				System.out.println("ELSE");
 				while ((lineaPrev = inPrev.readLine()) != null) {
 					// <Tratar Maestro sin Movimientos>
-					// ----------------------------------------------------------------------------v
 					lineaPrev = inPrev.readLine();
 					lineaPrev = lineaPrev.replaceAll("\"", "");
 					hP = new HoraPrevision(lineaPrev.split(","));
 					hR = new HoraRealClima(lineaReal.split(","));
 
-					if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
-						
-
-						date = hR.getDate();
-						
-						TempPrev = hP.getTempC();
-						TempReal = hR.getTemp();
-						TempFallo = TempReal - TempPrev;
-
-						PrecipPrev = hP.getPrecipitacion();
-						PrecipReal = hR.getPrec();
-						PrecipFallo = PrecipReal - PrecipPrev;
-						
-						WindDirPrev = hP.getDirViento();
-						WindDirReal = hR.getDirStr();
-						if (WindDirReal.equalsIgnoreCase(WindDirPrev)) {
-							WindDirFallo = WindDirReal;
-						} else WindDirFallo = "La dirección del viento real es: "+WindDirReal+" ,y la de la prevision es: "+WindDirPrev+".";
-						
-						WindVelPrev = hP.getVelViento();
-						WindVelReal = hR.getMod();
-						WindVelFallo = WindVelReal - WindVelPrev;
-						
-						DatosFallo hF = new DatosFallo(date, WindDirFallo, WindVelFallo, PrecipFallo, TempFallo);
-						
-						System.out.println(hF.toString());
-
-					}
-					// ----------------------------------------------------------------------------^
+					hF = tratarDatos(hP, hR);
 				}
 			}
 
@@ -278,6 +139,39 @@ public class CruzarDatos {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private DatosFallo tratarDatos(HoraPrevision hP, HoraRealClima hR) {
+		// TODO Auto-generated method stub
+		
+		if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
+
+			date = hR.getDate();
+
+			TempPrev = hP.getTempC();
+			TempReal = hR.getTemp();
+			TempFallo = TempReal - TempPrev;
+
+			PrecipPrev = hP.getPrecipitacion();
+			PrecipReal = hR.getPrec();
+			PrecipFallo = PrecipReal - PrecipPrev;
+
+			WindDirPrev = hP.getDirViento();
+			WindDirReal = hR.getDirStr();
+			if (WindDirReal.equalsIgnoreCase(WindDirPrev)) {
+				WindDirFallo = WindDirReal;
+			} else
+				WindDirFallo = "La dirección del viento real es: " + WindDirReal + " ,y la de la prevision es: "
+						+ WindDirPrev + ".";
+
+			WindVelPrev = hP.getVelViento();
+			WindVelReal = hR.getMod();
+			WindVelFallo = WindVelReal - WindVelPrev;
+
+			hF = new DatosFallo(date, WindDirFallo, WindVelFallo, PrecipFallo, TempFallo);
+
+		}
+		return hF;
 	}
 
 }
