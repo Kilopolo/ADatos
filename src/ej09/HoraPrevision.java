@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /*
  * Fecha y hora oficial,"Temperatura (ºC)","Velocidad del viento (km/h)"
@@ -13,7 +14,8 @@ import java.util.Locale;
  */
 public class HoraPrevision implements Comparable<HoraPrevision> {
 
-	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.GERMANY);
+	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
+	private TimeZone setGTMtime= TimeZone.getTimeZone("GTM");
 	private Date fechayHora;
 	private float tempC;
 	private int VelViento;
@@ -40,6 +42,8 @@ public class HoraPrevision implements Comparable<HoraPrevision> {
  */
 	public HoraPrevision(String[] campos)  {
 
+		
+		
 		try {
 			fechayHora = format.parse(campos[0]);
 		} catch (ParseException e) {

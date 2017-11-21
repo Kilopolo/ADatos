@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class CruzarDatos {
 
@@ -17,56 +20,16 @@ public class CruzarDatos {
 			"D:\\Google Drive\\CLASE\\2DAM\\Acceso a datos\\Ejercicios\\09. CruzarDatos\\DatEnfrentados.txt");
 	BufferedReader inPrev, inReal;
 	BufferedWriter outEnfren;
+	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
 
 	public static void main(String[] args) {
 		CruzarDatos o = new CruzarDatos();
 		o.CruzDat(DatPrevClim, DatRealClim, DatEnfrentados);
 
 	}
+
 	/**
 	 * 
- * Abrir FMaestro para lectura
- * Abrir FMovimientos para lectura
- * Abrir FActualizado para escritura
- * 
- * Leer RegistroMaestro
- * Leer RegistroMovimientos
- * 
- * 		Mientras no EOF(FMaestro) y no EOF(FMovimientos)
- * 			Si ClaveRegistroMaestro<ClaveRegistroMovimientos
- * 				Entonces <Tratar Maestro sin Movimientos>
- * 						Leer RegistroMaestro
- * 			
- * 				Sino
- * 					Si ClaveRegistroMaestro>ClaveRegistroMovimientos
- * 					Entonces <Tratar Movimiento sin Maestro>
- * 							Leer RegistroMovimientos
- * 					SiNo <Tratar Maestro con Movimientos>
- * 						//Puede incluir una ruptura de control si hay varios Movimientos
- * 						//En cualquier caso incluye como minimo una lectura de Movimientos
- * 						//Mientras FMaestro == FMovimientos { hacer lo que se tenga que hacer }
- * 						Leer RegistroMaestro
- * 				FinSi
- * 						
- * 			FinSi
- * 		FinMientras
- * 
- * 		Si EOF(FMaestro)
- * 			Entonces 
- * 				Mientras no EOF(FMovimientos)
- * 					<Tratar Movimiento sin Maestro>
- * 					Leer RegistroMovimientos
- * 				FinMientras
- * 		SiNo
- * 			Mientras no EOF(Maestro)
- * 				<Tratar Maestro sin Movimientos>
- * 				Leer RegistroMaestro
- * 			Fin Mientras
- * 		FinSi
- * 
- * Cerrar ficheros
- * 
- * 
 	 * @param DatPrevClim
 	 * @param DatRealClim
 	 * @param DatEnfrentados
@@ -95,17 +58,32 @@ public class CruzarDatos {
 
 				if (hP.getFechayHora().before(hR.getDate())) {
 					// <Tratar Maestro sin Movimientos>
-					System.out.println("1.PRUEBASS_ _ _ " + hP.toString());
+					// ----------------------------------------------------------------------------v
 					lineaPrev = inPrev.readLine();
 					lineaPrev = lineaPrev.replaceAll("\"", "");
 					hP = new HoraPrevision(lineaPrev.split(","));
+					hR = new HoraRealClima(lineaReal.split(","));
 
+					if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
+						System.out.println("IF 1");
+						System.out.println("1. " + hP.getFechayHora() + " - 2. " + hR.getDate());
+						float TempPrev = hP.getTempC();
+						float TempReal = hR.getTemp();
+						float TempFallo = TempReal - TempPrev;
+					}
+
+					// ----------------------------------------------------------------------------^
 				} else {
 					if (hP.getFechayHora().after(hR.getDate())) {
 						// <Tratar Movimiento sin Maestro>
-						System.out.println("2.PRUEBAS- - - " + hR.toString());
-						lineaReal = inReal.readLine();
+						// ----------------------------------------------------------------------------v
+						if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
+							System.out.println("ELSE 1 IF 2");
+							System.out.println("1. " + hP.getFechayHora() + " - 2. " + hR.getDate());
+						}
 
+						lineaReal = inReal.readLine();
+						// ----------------------------------------------------------------------------^
 					} else {
 						// <Tratar Maestro con Movimientos>
 
@@ -117,10 +95,15 @@ public class CruzarDatos {
 						 * FMovimientos { hacer lo que se tenga que hacer }
 						 */
 
-						System.out.println("1.PRUEBASS_ _ _ " + hP.toString());
+						// ----------------------------------------------------------------------------v
+						if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
+							System.out.println("ELSE 2");
+							System.out.println("1. " + hP.getFechayHora() + " - 2. " + hR.getDate());
+						}
+
 						lineaPrev = inPrev.readLine();
 						lineaPrev = lineaPrev.replaceAll("\"", "");
-
+						// ----------------------------------------------------------------------------^
 					}
 				}
 			}
@@ -131,18 +114,33 @@ public class CruzarDatos {
 				System.out.println("ENTRA if");
 				while ((lineaReal = inReal.readLine()) != null) {
 					// <Tratar Movimiento sin Maestro>
-					System.out.println("2.PRUEBAS- - - " + hR.toString());
+					// ----------------------------------------------------------------------------v
 					lineaReal = inReal.readLine();
 					hR = new HoraRealClima(lineaReal.split(","));
+
+					if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
+						System.out.println("IF 1");
+						System.out.println("1. " + hP.getFechayHora() + " - 2. " + hR.getDate());
+
+					}
+					// ----------------------------------------------------------------------------^
 				}
 			} else {
 				System.out.println("ELSE");
 				while ((lineaPrev = inPrev.readLine()) != null) {
 					// <Tratar Maestro sin Movimientos>
-					System.out.println("1.PRUEBASS_ _ _ " + hP.toString());
+					// ----------------------------------------------------------------------------v
 					lineaPrev = inPrev.readLine();
 					lineaPrev = lineaPrev.replaceAll("\"", "");
 					hP = new HoraPrevision(lineaPrev.split(","));
+					hR = new HoraRealClima(lineaReal.split(","));
+
+					if (hP.getFechayHora().compareTo(hR.getDate()) == 0) {
+						System.out.println("IF 1");
+						System.out.println("1. " + hP.getFechayHora() + " - 2. " + hR.getDate());
+
+					}
+					// ----------------------------------------------------------------------------^
 				}
 			}
 
@@ -161,8 +159,4 @@ public class CruzarDatos {
 		}
 	}
 
-
 }
-	
-	
-

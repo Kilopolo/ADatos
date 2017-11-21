@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class HoraRealClima implements Comparable<HoraRealClima> {
 
-	private DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.GERMANY);
+	private DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.FRANCE);
 	private Date date;
 	private float lat;
 	private float lon;
