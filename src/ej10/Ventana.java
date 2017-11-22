@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class Ventana extends Canvas{
 	
 
-	public Ventana(int width,int height, String title, ErrorTempGrafico errorTempGrafico) {
+	public Ventana(int width,int height, String title) {
 	
 		JFrame frame = new JFrame(title);
 		
@@ -22,7 +22,7 @@ public class Ventana extends Canvas{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(errorTempGrafico);
+//		frame.add(errorTempGrafico);
 		frame.setVisible(true);
 				
 		JPanel p = new JPanel();
