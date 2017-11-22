@@ -15,7 +15,7 @@ import java.util.TimeZone;
 public class HoraPrevision implements Comparable<HoraPrevision> {
 
 	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
-	private TimeZone setGTMtime= TimeZone.getTimeZone("GTM");
+	//private TimeZone setGTMtime= TimeZone.getTimeZone("GTM");
 	private Date fechayHora;
 	private float tempC;
 	private int VelViento;

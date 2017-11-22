@@ -5,10 +5,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class HoraRealClima implements Comparable<HoraRealClima> {
 
 	private DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.FRANCE);
+	private TimeZone gmtTime = TimeZone.getTimeZone("GMT");
 	private Date date;
 	private float lat;
 	private float lon;
@@ -39,7 +41,7 @@ public class HoraRealClima implements Comparable<HoraRealClima> {
 	 * @param campos
 	 */
 	public HoraRealClima(String[] campos) {
-
+		format.setTimeZone(gmtTime);//Cuando se almacene la fecha en el objeto lo hara en formato GMT
 		try {
 			date = format.parse(campos[0]);
 		} catch (ParseException e) {
@@ -110,7 +112,7 @@ public class HoraRealClima implements Comparable<HoraRealClima> {
 		} else if (dir > 157.5 && dir <= 202.5) {
 			return "Sur";
 		} else if (dir > 202.5 && dir <= 247.5) {
-			return "Suroeste";
+			return "Sudoeste";
 		} else if (dir > 247.5 && dir <= 292.5) {
 			return "Oeste";
 		} else if (dir > 292.5 && dir <= 337.5) {
