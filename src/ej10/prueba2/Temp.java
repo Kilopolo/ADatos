@@ -7,17 +7,15 @@ import javax.swing.JPanel;
 
 public class Temp extends JPanel {
 
-//	private MainClass m;
+	private MainClass m;
 //	private int n = m.getnPoints();
-//	private int[] tempXpoints = new int[n];
-//	private int[] tempYpoints = new int[n];
-//	private int contPuntosX;
-//	private final int proporcionX, proporcionY;
+	private int[] tempXpoints = null;
+	private int[] tempYpoints = null;
+	private int contPuntosX;
+	private final int proporcionX, proporcionY;
 //
 //	public Temp() {
-//		proporcionY = 5;
-//		proporcionX = 5;
-//		contPuntosX = 0;
+
 //		
 //		for (Datos o : m.horas) {
 //			tempYpoints[contPuntosX] = (int) o.getTemp() * proporcionY;
@@ -27,6 +25,18 @@ public class Temp extends JPanel {
 //
 //		
 //	}
+	
+	public Temp() {
+		// TODO Auto-generated constructor stub
+		proporcionY = 5;
+		proporcionX = 5;
+		contPuntosX = m.getnPoints();
+		
+		for (int i = 0; i < contPuntosX ; i++) {
+			System.out.println(i);
+		}
+	
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
