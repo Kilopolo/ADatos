@@ -6,13 +6,26 @@ import javax.swing.JPanel;
 
 
 public class Temp extends JPanel {
+	@Override
+	public void paintComponent(Graphics g) {
 
-	private MainClass m;
+		g.setColor(Color.GREEN);
+//		g.drawPolyline(tempXpoints, tempYpoints, n);
+		g.fillRect(200, 200, 30, 400);
+	}
+	
+	
+	public static void main(String[] args) {
+		MainClass m= new MainClass();
+		String dates= m.getDateStr();
+		System.out.println(dates);
+	}
+//	
 //	private int n = m.getnPoints();
-	private int[] tempXpoints = null;
-	private int[] tempYpoints = null;
-	private int contPuntosX;
-	private final int proporcionX, proporcionY;
+//	private int[] tempXpoints = null;
+//	private int[] tempYpoints = null;
+//	private int contPuntosX;
+//	private final int proporcionX, proporcionY;
 //
 //	public Temp() {
 
@@ -26,24 +39,18 @@ public class Temp extends JPanel {
 //		
 //	}
 	
-	public Temp() {
-		// TODO Auto-generated constructor stub
-		proporcionY = 5;
-		proporcionX = 5;
-		contPuntosX = m.getnPoints();
-		
-		for (int i = 0; i < contPuntosX ; i++) {
-			System.out.println(i);
-		}
-	
-	}
+//	public Temp() {
+//		// TODO Auto-generated constructor stub
+//		proporcionY = 5;
+//		proporcionX = 5;
+//		contPuntosX = m.getnPoints();
+//		
+//		for (int i = 0; i < contPuntosX ; i++) {
+//			System.out.println(i);
+//		}
+//	
+//	}
 
-	@Override
-	public void paintComponent(Graphics g) {
 
-		g.setColor(Color.GREEN);
-//		g.drawPolyline(tempXpoints, tempYpoints, n);
-		g.fillRect(200, 200, 30, 400);
-	}
 
 }

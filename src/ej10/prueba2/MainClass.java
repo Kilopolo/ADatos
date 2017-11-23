@@ -23,12 +23,21 @@ public class MainClass {
 	private String[] precip = null;
 	private String[] WindVel = null;
 	private String[] WindDir = null;
-	private float[] tempF = null;
+	protected float[] tempF = null;
 	private float[] precipF = null;
 	private float[] windVelF = null;
 	private int contPuntosX;
 	private int nPoints;
 	private String dateStr = "", tempStr = "", precipStr = "", windVelStr = "", windDirStr = "";
+	int tamañoTempF = 0;
+
+	public int getTamañoTempF() {
+		return tamañoTempF;
+	}
+
+	public void setTamañoTempF(int tamañoTempF) {
+		this.tamañoTempF = tamañoTempF;
+	}
 
 	public static void main(String[] args) {
 		MainClass m = new MainClass();
@@ -47,11 +56,18 @@ public class MainClass {
 		precip = precipStr.split(",");
 		WindVel = windVelStr.split(",");
 		WindDir = windDirStr.split(",");
-
+		
+		
+		int cont=0;
 		tempF = new float[temp.length];
 		for (int i = 0; i < temp.length; i++) {
 			tempF[i] = Float.parseFloat(temp[i]);
+			cont++;
 		}
+		tamañoTempF = cont;
+		
+		
+		
 		precipF = new float[precip.length];
 		for (int i = 0; i < precip.length; i++) {
 			precipF[i] = Float.parseFloat(precip[i]);

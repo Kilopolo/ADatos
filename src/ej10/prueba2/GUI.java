@@ -108,7 +108,7 @@ public class GUI extends JFrame implements ActionListener{
 			windVel.setVisible(false);
 			precip.setVisible(false);
 			temp.setVisible(true);
-			temp.repaint();
+			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B2")) {
@@ -116,7 +116,7 @@ public class GUI extends JFrame implements ActionListener{
 			windVel.setVisible(false);
 			temp.setVisible(false);
 			precip.setVisible(true);
-			precip.repaint();
+			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B3")) {
@@ -124,7 +124,7 @@ public class GUI extends JFrame implements ActionListener{
 			precip.setVisible(false);
 			temp.setVisible(false);
 			windDir.setVisible(true);
-			windDir.repaint();
+			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B4")) {
@@ -132,7 +132,7 @@ public class GUI extends JFrame implements ActionListener{
 			precip.setVisible(false);
 			temp.setVisible(false);
 			windVel.setVisible(true);
-			windVel.repaint();
+			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B5")) {
