@@ -4,27 +4,36 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-public class Temp extends JPanel{
 
+public class Temp extends JPanel {
 
-	
+//	private MainClass m;
+//	private int n = m.getnPoints();
+//	private int[] tempXpoints = new int[n];
+//	private int[] tempYpoints = new int[n];
+//	private int contPuntosX;
+//	private final int proporcionX, proporcionY;
+//
+//	public Temp() {
+//		proporcionY = 5;
+//		proporcionX = 5;
+//		contPuntosX = 0;
+//		
+//		for (Datos o : m.horas) {
+//			tempYpoints[contPuntosX] = (int) o.getTemp() * proporcionY;
+//			tempXpoints[contPuntosX] = contPuntosX * proporcionX;
+//			contPuntosX++;
+//		}
+//
+//		
+//	}
+
 	@Override
 	public void paintComponent(Graphics g) {
-		g.fillOval(200, 200, 200, 200);
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, 200, 200);
 
-//		for (Datos d : horas) {
-//			d.getDate();
-//		}
-		
 		g.setColor(Color.GREEN);
-	    int[] xs = {25, 75, 125, 85, 125, 75, 25, 65};
-	    int[] ys = {50, 90, 50, 100, 150, 110, 150, 100};
-	    g.drawPolyline(xs, ys, 8);
-
-		
+//		g.drawPolyline(tempXpoints, tempYpoints, n);
+		g.fillRect(200, 200, 30, 400);
 	}
-
 
 }

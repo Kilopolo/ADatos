@@ -5,4 +5,4 @@
  * @author Pablo
  *
  */
-package ej10;
+package ej10.prueba1;

@@ -6,9 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,10 +16,6 @@ public class GUI extends JFrame implements ActionListener{
 
 	protected static final int WIDTH = 900;
 	protected static final int HEIGHT = WIDTH / 16 * 9;
-	private static File f = new File(
-			"D:\\Google Drive\\CLASE\\2DAM\\Acceso a datos\\Ejercicios\\10. GraficaError\\DatEnfrentados.txt");
-	private BufferedReader in;
-	private String linea, cabezera;
 	private Temp temp;
 	private JButton b1,b2,b3,b4,b5;
 	private JPanel menu,grafica;
@@ -78,7 +71,7 @@ public class GUI extends JFrame implements ActionListener{
 		grafica = new JPanel();
 		grafica.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
 		add(grafica, BorderLayout.WEST);
-		
+	
 
 		temp = new Temp();
 		temp.setVisible(false);
@@ -99,6 +92,9 @@ public class GUI extends JFrame implements ActionListener{
 		windVel.setVisible(false);
 		windVel.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
 		grafica.add(windVel);
+		
+		
+		
 		
 		grafica.setBackground(Color.BLACK);
 	}
@@ -152,9 +148,7 @@ public class GUI extends JFrame implements ActionListener{
 		
 	}
 	
-	public static void main(String[] args) {
-		new GUI();
-	}
+
 	
 
 }

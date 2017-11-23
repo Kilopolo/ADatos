@@ -8,14 +8,14 @@ import java.util.Locale;
 
 public class Datos implements Comparable<Datos>{
 
-	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
+	protected DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
 	private Date date;
 	private float precip;
 	private float temp;
 	private float windVel;
 	private String windDir;
 	
-	Datos(String[]campos){
+	public Datos(String[]campos){
 		
 		try {
 			this.date = format.parse(campos[0]);
