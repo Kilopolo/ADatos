@@ -45,7 +45,7 @@ public class MainClass {
 		m.totalPuntosTreeSet();
 		m.separarDatos();
 //		m.crearArrays();
-//		GUI gui = new GUI();
+		GUI gui = new GUI();
 
 	}
 
@@ -100,8 +100,8 @@ public class MainClass {
 			contador++;
 
 		}
-		 System.out.println(dateStr + "\n" + tempStr + "\n" + precipStr + "\n" +
-		 windVelStr + "\n" + windDirStr + "\n");
+//		 System.out.println(dateStr + "\n" + tempStr + "\n" + precipStr + "\n" +
+//		 windVelStr + "\n" + windDirStr + "\n");
 
 	}
 
@@ -132,6 +132,7 @@ public class MainClass {
 			while (linea != null) {
 
 				Datos d = new Datos(linea.split(","));
+				
 				horas.add(d);
 
 				linea = in.readLine();
