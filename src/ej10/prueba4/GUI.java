@@ -1,4 +1,4 @@
-package ej10.prueba2;
+package ej10.prueba4;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,11 +18,7 @@ public class GUI extends JFrame implements ActionListener{
 	protected static final int HEIGHT = WIDTH / 16 * 9;
 	private JButton b1,b2,b3,b4,b5;
 	private JPanel menu,grafica;
-	private Temp temp;
-
-	private Precip precip;
-	private WindDir windDir;
-	private WindVel windVel;
+	private PanelGrafica pg ;
 	
 	public GUI(){
 		//JFRAME
@@ -71,33 +67,15 @@ public class GUI extends JFrame implements ActionListener{
 		//PANEL GRAFICA
 		grafica = new JPanel();
 		grafica.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
+		grafica.setBackground(Color.BLACK);
 		add(grafica, BorderLayout.WEST);
 	
+		
+		
+		
+		
+		
 
-		temp = new Temp();
-		temp.setVisible(false);
-		temp.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
-		grafica.add(temp);
-		
-		precip = new Precip();
-		precip.setVisible(false);
-		precip.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
-		grafica.add(precip);
-		
-		windDir = new WindDir();
-		windDir.setVisible(false);
-		windDir.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
-		grafica.add(windDir);
-		
-		windVel = new WindVel();
-		windVel.setVisible(false);
-		windVel.setPreferredSize(new Dimension(WIDTH-150, HEIGHT));
-		grafica.add(windVel);
-		
-		
-		
-		
-		grafica.setBackground(Color.BLACK);
 	}
 	
 	@Override
@@ -105,43 +83,29 @@ public class GUI extends JFrame implements ActionListener{
 
 
 		if(e.getActionCommand().equals("B1")) {
-			windDir.setVisible(false);
-			windVel.setVisible(false);
-			precip.setVisible(false);
-			temp.setVisible(true);
+			pg = new PanelGrafica(0, WIDTH-150, HEIGHT);
+			
 			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B2")) {
-			windDir.setVisible(false);
-			windVel.setVisible(false);
-			temp.setVisible(false);
-			precip.setVisible(true);
+			pg = new PanelGrafica(1, WIDTH-150, HEIGHT);
+			
 			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B3")) {
-			windVel.setVisible(false);
-			precip.setVisible(false);
-			temp.setVisible(false);
-			windDir.setVisible(true);
+
 			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B4")) {
-			windDir.setVisible(false);
-			precip.setVisible(false);
-			temp.setVisible(false);
-			windVel.setVisible(true);
+
 			grafica.repaint();
 		}
 		
 		if(e.getActionCommand().equals("B5")) {
-			windDir.setVisible(false);
-			windVel.setVisible(false);
-			precip.setVisible(false);
-			temp.setVisible(false);
-			grafica.setBackground(Color.BLACK);
+
 			grafica.repaint();
 		}
 		

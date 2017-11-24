@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class WindVel extends JPanel {
+	
+	private String velocidadesViento="3.0,4.0,2.0,5.0,3.0,3.0,0.0,0.0,0.0,0.0,0.0,-1.0,-4.0,0.0,1.0,1.0,3.0,2.0,2.0,0.0,-2.0,4.0,7.0,0.0,0.0,0.0,3.0,7.0,4.0,3.0,6.0,-3.0,0.0,3.0,-1.0,4.0,4.0,4.0,-2.0,-2.0,8.0,9.0,8.0,7.0,8.0,9.0,9.0,10.0,-12.0";
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		g.fillOval(200, 200, 200, 200);

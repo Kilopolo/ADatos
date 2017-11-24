@@ -1,4 +1,4 @@
-package ej10.prueba2;
+package ej10.prueba4;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,45 +10,31 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TreeSet;
 
-public class MainClass {
 
+
+
+public class Datos {
+	
 	private static File Datos = new File(
 			"D:\\Google Drive\\CLASE\\2DAM\\Acceso a datos\\Ejercicios\\10. GraficaError\\DatEnfrentados.txt");
 	private BufferedReader in;
 	private String linea, cabezera;
-	private TreeSet<Datos> horas = new TreeSet<Datos>();
+	private TreeSet<Hora> horas = new TreeSet<Hora>();
 	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
-	private String[] date = null;
+	protected String[] date = null;
 	private String[] temp = null;
 	private String[] precip = null;
 	private String[] WindVel = null;
-	private String[] WindDir = null;
+	protected String[] WindDir = null;
 	protected float[] tempF = null;
-	private float[] precipF = null;
-	private float[] windVelF = null;
+	protected float[] precipF = null;
+	protected float[] windVelF = null;
 	private int contPuntosX;
 	private int nPoints;
 	private String dateStr = "", tempStr = "", precipStr = "", windVelStr = "", windDirStr = "";
 	int tamañoTempF = 0;
-
-	public int getTamañoTempF() {
-		return tamañoTempF;
-	}
-
-	public void setTamañoTempF(int tamañoTempF) {
-		this.tamañoTempF = tamañoTempF;
-	}
-
-	public static void main(String[] args) {
-		MainClass m = new MainClass();
-		m.EntradaDatos(Datos);
-		m.totalPuntosTreeSet();
-		m.separarDatos();
-//		m.crearArrays();
-//		GUI gui = new GUI();
-
-	}
-
+	
+	
 	public void crearArrays() {
 
 		date = dateStr.split(",");
@@ -82,7 +68,7 @@ public class MainClass {
 	public void separarDatos() {
 		// TODO Auto-generated method stub
 		int contador = 0;
-		for (Datos o : horas) {
+		for (Hora o : horas) {
 			if (contador == 0) {
 				dateStr += o.format.format(o.getDate());
 				tempStr += o.getTemp();
@@ -107,7 +93,7 @@ public class MainClass {
 
 	public void totalPuntosTreeSet() {
 		int n = 0;
-		for (Datos datos : horas) {
+		for (Hora datos : horas) {
 			n++;
 		}
 		// System.out.println(n);
@@ -131,8 +117,8 @@ public class MainClass {
 			linea = in.readLine();
 			while (linea != null) {
 
-				Datos d = new Datos(linea.split(","));
-				horas.add(d);
+				Hora h = new Hora(linea.split(","));
+				horas.add(h);
 
 				linea = in.readLine();
 			}
@@ -151,14 +137,6 @@ public class MainClass {
 		}
 	}
 
-	public int getnPoints() {
-		return nPoints;
-	}
-
-	public void setnPoints(int nPoints) {
-		this.nPoints = nPoints;
-	}
-
 	public static File getDatos() {
 		return Datos;
 	}
@@ -175,7 +153,7 @@ public class MainClass {
 		return cabezera;
 	}
 
-	public TreeSet<Datos> getHoras() {
+	public TreeSet<Hora> getHoras() {
 		return horas;
 	}
 
@@ -219,6 +197,10 @@ public class MainClass {
 		return contPuntosX;
 	}
 
+	public int getnPoints() {
+		return nPoints;
+	}
+
 	public String getDateStr() {
 		return dateStr;
 	}
@@ -239,6 +221,10 @@ public class MainClass {
 		return windDirStr;
 	}
 
+	public int getTamañoTempF() {
+		return tamañoTempF;
+	}
+
 	public static void setDatos(File datos) {
 		Datos = datos;
 	}
@@ -255,7 +241,7 @@ public class MainClass {
 		this.cabezera = cabezera;
 	}
 
-	public void setHoras(TreeSet<Datos> horas) {
+	public void setHoras(TreeSet<Hora> horas) {
 		this.horas = horas;
 	}
 
@@ -299,6 +285,10 @@ public class MainClass {
 		this.contPuntosX = contPuntosX;
 	}
 
+	public void setnPoints(int nPoints) {
+		this.nPoints = nPoints;
+	}
+
 	public void setDateStr(String dateStr) {
 		this.dateStr = dateStr;
 	}
@@ -317,5 +307,9 @@ public class MainClass {
 
 	public void setWindDirStr(String windDirStr) {
 		this.windDirStr = windDirStr;
+	}
+
+	public void setTamañoTempF(int tamañoTempF) {
+		this.tamañoTempF = tamañoTempF;
 	}
 }

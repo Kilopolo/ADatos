@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class Precip extends JPanel {
+	private String precipitaciones="0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.0,0.0,0.0,0.0,-1.0,0.0,0.0,0.0,0.0,0.0,-1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0";
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		g.fillOval(200, 200, 200, 200);
