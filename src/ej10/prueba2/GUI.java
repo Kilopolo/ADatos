@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet.FontAttribute;
 
 // FECHA  , Precip=  [Diferencia]  , Temp=  [Diferencia]  , WindVel=  [Diferencia] , WindDir= [Diferencia] 
 
@@ -85,6 +86,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		JTextPane txt = new JTextPane();
 		Font font = new Font("TimesNewRoman", Font.PLAIN, 40);
+		
 		txt.setFont(font);
 		inicio.add(txt);
 		txt.setText("Gráficas Enfrentamientos.\r\n" + "Pablo Díaz Rubio");
