@@ -43,9 +43,9 @@ public class MainClass {
 		MainClass m = new MainClass();
 		m.EntradaDatos(Datos);
 		m.totalPuntosTreeSet();
-		m.separarDatos();
+		m.separarDatosyCrearGUI();
 //		m.crearArrays();
-		GUI gui = new GUI();
+		
 
 	}
 
@@ -79,7 +79,7 @@ public class MainClass {
 
 	}
 
-	public void separarDatos() {
+	public void separarDatosyCrearGUI() {
 		// TODO Auto-generated method stub
 		int contador = 0;
 		for (Datos o : horas) {
@@ -102,7 +102,7 @@ public class MainClass {
 		}
 //		 System.out.println(dateStr + "\n" + tempStr + "\n" + precipStr + "\n" +
 //		 windVelStr + "\n" + windDirStr + "\n");
-
+		GUI gui = new GUI(dateStr,tempStr,precipStr,windVelStr,windDirStr);
 	}
 
 	public void totalPuntosTreeSet() {
