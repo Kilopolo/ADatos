@@ -19,7 +19,7 @@ public class WindVel extends JPanel {
 	public WindVel(String horas, String velocidadesViento) {
 		// TODO Auto-generated constructor stub
 	
-		proporcionY = 20;
+		proporcionY = 15;
 		proporcionX = 15;
 		yPointsStr = velocidadesViento.split(",");
 		xHorasStr = horas.split(",");
