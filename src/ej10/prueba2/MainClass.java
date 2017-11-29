@@ -18,14 +18,7 @@ public class MainClass {
 	private String linea, cabezera;
 	private TreeSet<Datos> horas = new TreeSet<Datos>();
 	private DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE);
-	private String[] date = null;
-	private String[] temp = null;
-	private String[] precip = null;
-	private String[] WindVel = null;
-	private String[] WindDir = null;
-	protected float[] tempF = null;
-	private float[] precipF = null;
-	private float[] windVelF = null;
+
 	private int contPuntosX;
 	private int nPoints;
 	private String dateStr = "", tempStr = "", precipStr = "", windVelStr = "", windDirStr = "";
@@ -42,42 +35,11 @@ public class MainClass {
 	public static void main(String[] args) {
 		MainClass m = new MainClass();
 		m.EntradaDatos(Datos);
-		m.totalPuntosTreeSet();
 		m.separarDatosyCrearGUI();
-//		m.crearArrays();
 		
 
 	}
 
-	public void crearArrays() {
-
-		date = dateStr.split(",");
-		temp = tempStr.split(",");
-		precip = precipStr.split(",");
-		WindVel = windVelStr.split(",");
-		WindDir = windDirStr.split(",");
-		
-		
-		int cont=0;
-		tempF = new float[temp.length];
-		for (int i = 0; i < temp.length; i++) {
-			tempF[i] = Float.parseFloat(temp[i]);
-			cont++;
-		}
-		tamañoTempF = cont;
-		
-		
-		
-		precipF = new float[precip.length];
-		for (int i = 0; i < precip.length; i++) {
-			precipF[i] = Float.parseFloat(precip[i]);
-		}
-		windVelF = new float[WindVel.length];
-		for (int i = 0; i < WindVel.length; i++) {
-			windVelF[i] = Float.parseFloat(WindVel[i]);
-		}
-
-	}
 
 	public void separarDatosyCrearGUI() {
 		// TODO Auto-generated method stub
@@ -105,14 +67,7 @@ public class MainClass {
 		GUI gui = new GUI(dateStr,tempStr,precipStr,windVelStr,windDirStr);
 	}
 
-	public void totalPuntosTreeSet() {
-		int n = 0;
-		for (Datos datos : horas) {
-			n++;
-		}
-		// System.out.println(n);
-		nPoints = n;
-	}
+
 
 	public void EntradaDatos(File fichero) {
 
@@ -184,37 +139,7 @@ public class MainClass {
 		return format;
 	}
 
-	public String[] getDate() {
-		return date;
-	}
 
-	public String[] getTemp() {
-		return temp;
-	}
-
-	public String[] getPrecip() {
-		return precip;
-	}
-
-	public String[] getWindVel() {
-		return WindVel;
-	}
-
-	public String[] getWindDir() {
-		return WindDir;
-	}
-
-	public float[] getTempF() {
-		return tempF;
-	}
-
-	public float[] getPrecipF() {
-		return precipF;
-	}
-
-	public float[] getWindVelF() {
-		return windVelF;
-	}
 
 	public int getContPuntosX() {
 		return contPuntosX;
@@ -264,37 +189,6 @@ public class MainClass {
 		this.format = format;
 	}
 
-	public void setDate(String[] date) {
-		this.date = date;
-	}
-
-	public void setTemp(String[] temp) {
-		this.temp = temp;
-	}
-
-	public void setPrecip(String[] precip) {
-		this.precip = precip;
-	}
-
-	public void setWindVel(String[] windVel) {
-		WindVel = windVel;
-	}
-
-	public void setWindDir(String[] windDir) {
-		WindDir = windDir;
-	}
-
-	public void setTempF(float[] tempF) {
-		this.tempF = tempF;
-	}
-
-	public void setPrecipF(float[] precipF) {
-		this.precipF = precipF;
-	}
-
-	public void setWindVelF(float[] windVelF) {
-		this.windVelF = windVelF;
-	}
 
 	public void setContPuntosX(int contPuntosX) {
 		this.contPuntosX = contPuntosX;

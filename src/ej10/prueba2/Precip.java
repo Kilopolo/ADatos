@@ -1,5 +1,6 @@
 package ej10.prueba2;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -43,9 +44,9 @@ public class Precip extends JPanel {
 				}
 				// PARA CAMBIAR LA LEYENDA A VERTICAL
 				Graphics2D g2 = (Graphics2D) g;
-				Font font = new Font("Arial", Font.PLAIN, 10);
+				Font font = new Font("Arial", Font.PLAIN, 14);
 				AffineTransform affineTransform = new AffineTransform();
-				affineTransform.rotate(Math.toRadians(90), 0, 0);
+				affineTransform.rotate(Math.toRadians(30), 0, 0);
 				Font rotatedFont = font.deriveFont(affineTransform);
 				g2.setFont(rotatedFont);
 
@@ -58,11 +59,18 @@ public class Precip extends JPanel {
 				for (int i = 0; i < xHorasStr.length; i++) {
 					g.drawLine(20 + i * proporcionX, 0, 20 + i * proporcionX, 365);
 				}
-				g.setColor(Color.WHITE);
-				for (int i = 0; i < xHorasStr.length; i++) {
-					g2.drawString(xHorasStr[i], 20 + (i * proporcionX), 370);
+				for (int i = 4; i < xHorasStr.length; i += 6) {
+					g.setColor(Color.darkGray);
+					g2.drawLine(20+i*proporcionX, 365, 20+i*proporcionX, 400);
+					g.setColor(Color.WHITE);
+					g2.drawString(xHorasStr[i], -40 + (i * proporcionX), 380);
 				}
-				g2.dispose();
+				// DATOS GRAFICA
+				Graphics2D g3 = (Graphics2D) g;
+				g3.setStroke(new BasicStroke(3));
+				g3.setColor(Color.GREEN);
+				g3.drawPolyline(xPoints, yPoints, yPointsStr.length);
+				g3.dispose();
 
 	}
 }

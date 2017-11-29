@@ -5,10 +5,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.text.AttributeSet.FontAttribute;
@@ -33,7 +36,11 @@ public class GUI extends JFrame implements ActionListener {
 		setTitle("Grafica");
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		// setLocationRelativeTo(null);
+//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//		Point middle = new Point(screenSize.width / 2, screenSize.height / 2);
+//		Point newLocation = new Point(middle.x - (getWidth() / 2), 
+//		                              middle.y - (getHeight() / 2));
+//		setLocation(newLocation);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setMaximumSize(new Dimension(WIDTH, HEIGHT));
 		setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -141,6 +148,7 @@ public class GUI extends JFrame implements ActionListener {
 			windDir.setVisible(true);
 			inicio.setVisible(false);
 			grafica.repaint();
+			JOptionPane.showMessageDialog(this, "Los puntos verdes son los datos reales del tiempo, y los puntos rojos son los datos de la prediccion.");
 		}
 
 		if (e.getActionCommand().equals("B4")) {
